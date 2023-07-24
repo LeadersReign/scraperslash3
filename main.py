@@ -2,12 +2,14 @@ import praw
 from rich import print as rprint
 from rich.console import Console
 from rich.tree import Tree
+from rich.layout import Layout
 from rich.progress import track
 from time import sleep
 from openpyxl import Workbook
 
 #Create a console instance
 console = Console()
+layout = Layout()
 console.print("[bold Yellow]Reddit Scrapper[/bold Yellow] by [bold magenta]0xDamiclone👽[/bold magenta]", style="bold red")
 
 #Create a workbook instance
@@ -25,7 +27,10 @@ reddit = praw.Reddit(client_id=_client_id,
                             user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36')
 def main():
     #Get user input
-    option = int(input("What will you like to do? \n 1. Analyse a subreddit \n 2. Scrape Popular subreddits \n 3. Seach for subreddits by a phrase/word: "))
+    rprint("=====================================================")
+    rprint("What will you like to do? \n 1. Analyse a subreddit \n 2. Scrape Popular subreddits \n 3. Seach for subreddits by a phrase/word: ")
+
+    option = int(input("Enter option: "))
     if option == 1:
         option = str(input("Enter Subreddit to analyse: "))
         analyseSubreddit(option)
@@ -33,6 +38,9 @@ def main():
         scrapePopularSubreddit()
     elif option == 3:
         searchSubredditsByName()
+    else:
+        rprint("[bold red]Invalid option, Please try again with numbers![/bold red]")
+        main()
 
 #Function to analyse a subreddit
 def analyseSubreddit(_option):
@@ -57,6 +65,8 @@ def analyseSubreddit(_option):
     for rule in subreddit.rules:
         tree.add(str(rule))
     rprint(tree)
+    print("=====================================================")
+    keepFunctionAlive()
 
 
 #function to scrape subreddits
@@ -66,23 +76,43 @@ def scrapePopularSubreddit():
         sleep(0.1)
     worksheetName = str(input("Enter name of worksheet to save subreddits to: "))
     wb.save(worksheetName+".xlsx")
+    rprint("=====================================================")
+    rprint("[bold green]Done![/bold green] \n[bold Yellow]Subreddits has been saved to "+worksheetName+".xlsx[/bold Yellow]")
+    rprint("=====================================================")
+    keepFunctionAlive()
 
 
-    
+#function to search subreddits by name
 def searchSubredditsByName():
     searchPhrase = str(input("Enter phrase/word to search for: "))
-    extendedSearchPhrase = "Similar subreddits that match " + searchPhrase 
-    tree = Tree(extendedSearchPhrase)
-    for subreddit in track(reddit.subreddits.search(searchPhrase)):
-        tree.add(str(subreddit))
-        sheet.append([subreddit.display_name, subreddit.title, subreddit.public_description, subreddit.url, subreddit.subscribers, subreddit.active_user_count, subreddit.created_utc, subreddit.over18, subreddit.allow_images, subreddit.allow_videos])
-        sleep(0.1)
+    for subreddit in track(reddit.subreddits.search(searchPhrase), description="Searching for subreddits...Chillax Bobo😎"):
+        sheet.append([subreddit.display_name, subreddit.title, subreddit.public_description, "https://reddit.com"+subreddit.url, subreddit.subscribers, subreddit.active_user_count, subreddit.created_utc, subreddit.over18, subreddit.allow_images, subreddit.allow_videos])
     worksheetName = str(input("Enter name of worksheet to save subreddits to: "))
     wb.save(worksheetName+".xlsx")
     rprint("=====================================================")
     rprint("[bold green]Done![/bold green] \n[bold Yellow]Subreddits has been saved to "+worksheetName+".xlsx[/bold Yellow]")
+    rprint("=====================================================")
+    keepFunctionAlive()
 
-    # rprint(subreddit)
+#function to keep the program running
+def keepFunctionAlive():
+    while True:
+        rprint("[bold Blue]What else will you like to do ( 0 to quit )[/bold Blue]? \n 1. Analyse a subreddit \n 2. Scrape Popular subreddits \n 3. Search for subreddits by a phrase/word: ")
+        option = int(input("Enter option:"))
+        if option == 1:
+            print("=====================================================")
+            rprint("[bold Yellow]Enter Subreddit to analyse: [/bold Yellow]")
+            phrase = str(input())
+            analyseSubreddit(phrase)
+        elif option == 2:
+            scrapePopularSubreddit()
+        elif option == 3:
+            searchSubredditsByName()
+        elif option == 0:
+            rprint("[bold red]Bye Bye,[/bold red] [bold magenta]Have a great Day Scrapper![/bold magenta]")
+            break
+        else:
+            rprint("[bold red]Invalid option, Please try again with numbers![/bold red]")
 
 if __name__ == '__main__':
     main()
