@@ -20,9 +20,16 @@ Reddit Bot  is a Python-based bot that allows you to scrape information from Red
 
 
 ## Images
-!["Luxury of Selecting difference options"](options.png)
-!["Scraping popular subreddit"](scrape-popular-subreddits.png)
-!["Scraping subreddit by keyword"](subreddits-by-search.png)
+* Analysis on a subreddit
+!["Analysis on a subreddit"](./img/subreddit-analysis.png)
+* Luxury of Selecting difference options
+!["Luxury of Selecting difference options"](./img/options.png)
+* Scraping popular subreddit
+!["Scraping popular subreddit"](./img/scrape-popular-subreddits.png)
+* Scraping subreddit by keyword
+!["Scraping subreddit by keyword"](./img/subreddits-by-search.png)
+
+
 
 
 
