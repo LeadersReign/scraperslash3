@@ -33,7 +33,7 @@ cd reddit-bot-scraper
 Install the required dependencies:
 
 ```
-pip3 install praw
+pip3 install -r requirements.txt
 ```
 
 ## Configuration
