@@ -5,19 +5,33 @@
 
 ## Overview
 
-Reddit Bot Scraper is a Python-based bot that allows you to scrape information from Reddit using the Reddit API. This bot can be used to gather data, perform sentiment analysis, or automate various tasks on the platform.
+Reddit Bot  is a Python-based bot that allows you to scrape information from Reddit using the Reddit API. This bot can be used to gather data, perform sentiment analysis, or automate various tasks on the platform.
+
 
 ## Features
 
-- Fetch posts and comments from specific subreddits.
-- Analyze post data for sentiment analysis.
-- Customizable scraping parameters.
+- Scrape popular subreddits.
+- Scrape subreddits by keyword.
+- Analysis on a subreddit.
+- Scrape posts and comments from any subreddit. (next update)
+- Save scraped data to an Excel file. (Support for CSV and JSON coming soon)
 - Easy-to-use and well-documented code.
+- Support for Python 3.9 or higher.
+
+
+## Images
+!["Luxury of Selecting difference options"](options.png)
+!["Scraping popular subreddit"](scrape-popular-subreddits.png)
+!["Scraping subreddit by keyword"](subreddits-by-search.png)
+
+
 
 ## Prerequisites
 
 - Python 3.9 or higher
 - PRAW (Python Reddit API Wrapper)
+- Openpyxl
+- Rich
 
 ## Installation
 
@@ -26,7 +40,7 @@ Clone the repository (bash) :
 git clone https://github.com/mandatedisrael/Reddit-scrapper.git
 
 
-cd reddit-bot-scraper
+cd reddit-scraper
 
 ```
 

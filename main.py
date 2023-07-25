@@ -10,7 +10,7 @@ from openpyxl import Workbook
 #Create a console instance
 console = Console()
 layout = Layout()
-console.print("[bold Yellow]Reddit Scrapper[/bold Yellow] by [bold magenta]Damiclone👽[/bold magenta]", style="bold red")
+console.print("[bold Yellow]Reddit Bot[/bold Yellow] by [bold magenta]Damiclone👽[/bold magenta]", style="bold red")
 
 #Create a workbook instance
 wb = Workbook()
@@ -82,8 +82,8 @@ def analyseSubreddit(_option):
 #function to scrape subreddits
 def scrapePopularSubreddit():
     try:
-        for subreddit in track(reddit.subreddits.popular()):
-            sheet.append([subreddit.display_name, subreddit.title, subreddit.public_description, subreddit.url, subreddit.subscribers, subreddit.active_user_count, subreddit.created_utc, subreddit.over18, subreddit.allow_images, subreddit.allow_videos])
+        for subreddit in track(reddit.subreddits.popular(), description="searching for popular subreddits..."):
+            sheet.append([subreddit.display_name, subreddit.title, subreddit.public_description, "https://reddit.com"+subreddit.url, subreddit.subscribers, subreddit.active_user_count, subreddit.created_utc, subreddit.over18, subreddit.allow_images, subreddit.allow_videos])
             sleep(0.1)
         worksheetName = str(input("Enter name of worksheet to save subreddits to: "))
         wb.save(worksheetName+".xlsx")
@@ -130,7 +130,7 @@ def keepFunctionAlive():
             searchSubredditsByName()
         elif option == 0:
             rprint("[bold blue]Bye Bye,[/bold blue] [bold magenta]Have a great Day Scrapper![/bold magenta]")
-            break
+            quit()
         else:
             rprint("[bold red]Invalid option, Please try again with numbers![/bold red]")
 
